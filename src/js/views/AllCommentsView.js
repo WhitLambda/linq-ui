@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 
+import CommentsList from "../components/CommentsList";
+
 class AllCommentsView extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class AllCommentsView extends Component {
     this.setState({comments: dummyData})
 
     /* TODO: setup comments fetching from API
-    fetch( TODO: add backend comments endpoint )
+    fetch()
       .then(response => this.setState({ comments: response.comments }));
 
     */
@@ -23,18 +25,11 @@ class AllCommentsView extends Component {
 
   render() {
     const comments = this.state.comments;
-    const elements = comments.map((c) => {
-      return (
-        <div>
-          <h4 key={c.username}>{c.username}</h4>
-          <p key={c.username}>{c.commentText}</p>
-        </div>
-      )
-    });
+    const commentsList = <CommentsList comments={comments} />
 
     return(
       <div>
-      {comments ? elements : <p>No comments found</p>}
+      {comments ? commentsList: <p>No comments found.</p>}
       </div>
     )
   }

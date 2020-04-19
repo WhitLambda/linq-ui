@@ -3,51 +3,38 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 import {Session} from 'bc-react-session';
 
-import LoginPage from "./js/LoginPage";
-import LoggedInView from "./js/LoggedInView";
+import LoginPage from "./js/views/LoginPage";
+import LoggedInView from "./js/views/LoggedInView";
 
 class App extends Component {
   render() {
     return(
       <Router>
           <Switch>
-          <Route path="/login" component={LoginPage}></Route>
-          <PrivateRoute path="/">
-            <LoggedInView/>
-          </PrivateRoute>
+          <Route path="/login" component={LoginPage} />
+          <PrivateRoute path="/" component={LoggedInView}/>
         </Switch>
       </Router>
     )
   }
 }
 
-function PrivateRoute({ children, ...rest }) {
+const PrivateRoute = ({component: Component, ...rest}) => {
   const session = Session.get();
-  const { payload } = Session.get();
 
-  // if not logged in, redirect to /login page. Else show private component
   return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        session.isValid ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
+    // Show the component only when the user is logged in
+    // Otherwise, redirect the user to /signin page
+    <Route {...rest} render={props => (
+      session.isValid ?
+      <Component {...props} />
+      : <Redirect to="/login" />
+    )} />
   );
-}
+};
 
 export default App;

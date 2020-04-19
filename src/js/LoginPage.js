@@ -2,7 +2,9 @@ import React, {Component} from "react";
 import {Session} from 'bc-react-session';
 
 class LoginPage extends Component {
-  validateForm() {
+  validateForm(e) {
+    e.preventDefault(); // prevent form submitting via action
+
     // make request to backend to validate user
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;

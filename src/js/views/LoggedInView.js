@@ -22,17 +22,17 @@ class LoggedInView extends Component {
 
     return(
       <div>
-        <div>
-          <ul>
-            <li><Link to="/all">All</Link></li>
-            <li><Link to="/sorted">Sorted</Link></li>
+        <div className="top-bar-nav">
+          <ul className="comments-views">
+            <li className="view-choices"><Link to="/all">All</Link></li>
+            <li className="view-choices"><Link to="/sorted">Sorted</Link></li>
           </ul>
 
           <h1>Linq</h1>
-          <button>Settings</button>
-          <div>
+          <button className="settings-button">Settings</button>
+          <div className="user-loggedin">
             <h3>{username}</h3>
-            <button onClick={this.handleLogout}>Logout</button>
+            <button onClick={this.handleLogout} className="logout-button">Logout</button>
           </div>
         </div>
 

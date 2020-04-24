@@ -13,10 +13,12 @@ class LoginPage extends Component {
 
     // need to implement authentication with the backend.
 
+    let dummyConfig = require("../../dummy_config.json");
+
     Session.start({
       payload: {
         username: username,
-        password: password
+        config: dummyConfig
       },
       expiration: 600000 // in milliseconds, set to ten minutes. user can also manually logout
       });
@@ -25,12 +27,12 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login">
         <h1>Linq</h1>
-        <form name="login" action="/" onSubmit={this.validateForm}>
+        <form name="login" className="login-form" action="/" onSubmit={this.validateForm}>
           <input type="text" name="username" id="username" placeholder="Username" required autoFocus />
-            <input type="password" name="username" id="password" placeholder="Password" required />
-          <input type="submit" value="Login" />
+          <input type="password" name="username" id="password" placeholder="Password" required />
+          <input type="submit" value="Login" className="login-button"/>
         </form>
       </div>
     )

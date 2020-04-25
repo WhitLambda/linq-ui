@@ -20,7 +20,7 @@ class LoginPage extends Component {
         username: username,
         config: dummyConfig
       },
-      expiration: 600000 // in milliseconds, set to ten minutes. user can also manually logout
+      expiration: 86400000 // in milliseconds, set to 1 day, user can also manually logout
       });
       window.location.href= "/all";
   }

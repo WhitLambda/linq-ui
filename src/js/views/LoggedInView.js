@@ -5,15 +5,31 @@ import {
   Link
 } from "react-router-dom";
 import {Session} from "bc-react-session";
+import ReactModal from "react-modal";
 
 import AllCommentsView from "./AllCommentsView";
 import SortedCommentsView from "./SortedCommentsView";
+import Settings from "./Settings";
 
 class LoggedInView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showSettings: false };
+
+    this.handleSettingsOpen = this.handleSettingsOpen.bind(this);
+    this.handleSettingsClose = this.handleSettingsClose.bind(this);
+  }
 
   handleLogout() {
     Session.destroy();
     window.location.href = "/"
+  }
+  handleSettingsOpen() {
+    this.setState({ showSettings: true });
+  }
+
+  handleSettingsClose() {
+    this.setState({ showSettings: false });
   }
 
   render() {
@@ -29,7 +45,18 @@ class LoggedInView extends Component {
           </ul>
 
           <h1>Linq</h1>
-          <button className="settings-button">Settings</button>
+          <button className="settings-button" onClick={this.handleSettingsOpen}>Settings</button>
+          <div>
+            <ReactModal
+              isOpen={this.state.showSettings}
+              shouldCloseOnOverlayClick={false}
+              shouldCloseOnEsc={true}
+              contentLabel="User Settings"
+            >
+              <button onClick={this.handleSettingsClose}>x</button>
+              <Settings />
+            </ReactModal>
+          </div>
           <div className="user-loggedin">
             <h3>{username}</h3>
             <button onClick={this.handleLogout} className="logout-button">Logout</button>

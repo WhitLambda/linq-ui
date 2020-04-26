@@ -23,6 +23,7 @@ class KeywordsConfigList extends Component {
     this.setUnsavedChanges = this.setUnsavedChanges.bind(this);
     this.unsetUnsavedChanges = this.unsetUnsavedChanges.bind(this);
     this.handleSaveConfig = this.handleSaveConfig.bind(this);
+    this.handleDeleteKeyword = this.handleDeleteKeyword.bind(this);
   }
 
   addKeyword() {
@@ -68,6 +69,12 @@ class KeywordsConfigList extends Component {
     this.setState({ showUnsavedChanges: false });
   }
 
+  handleDeleteKeyword(keyword) {
+    let keywordsData = this.state.keywordsData;
+    _.remove(keywordsData, keyword);
+    this.setState({ keywordsData: keywordsData, showUnsavedChanges: true });
+  }
+
   handleAddKeywordOpen() {
     this.setState({ showAddKeyword: true });
   }
@@ -111,6 +118,7 @@ class KeywordsConfigList extends Component {
         <Keyword keyword={k}
           setUnsavedChanges={thisComp.setUnsavedChanges}
           unsetUnsavedChanges={thisComp.unsetUnsavedChanges}
+          handleDeleteKeyword={thisComp.handleDeleteKeyword}
           key={k.keyword}/>
       )
     });

@@ -19,6 +19,7 @@ class Keyword extends Component {
     this.handleAddResponseOpen = this.handleAddResponseOpen.bind(this);
     this.handleAddResponseClose = this.handleAddResponseClose.bind(this);
     this.addResponse = this.addResponse.bind(this);
+    this.deleteResponse = this.deleteResponse.bind(this);
   }
 
   addResponse() {
@@ -48,6 +49,19 @@ class Keyword extends Component {
     thisComp.props.setUnsavedChanges();
   }
 
+  deleteKeyword = () => {
+    this.props.handleDeleteKeyword(this.props.keyword);
+  }
+
+  deleteResponse(response) {
+    let responses = this.state.responses;
+    _.remove(responses, function(n) {
+      return n === response;
+    });
+    this.setState({ responses: responses });
+    this.props.setUnsavedChanges();
+  }
+
   handleAddResponseOpen() {
     this.setState({ showAddResponse: true });
   }
@@ -59,9 +73,10 @@ class Keyword extends Component {
   render() {
     const responses = this.state.responses;
     const keyword = this.props.keyword;
+    const thisComp = this;
     const responsesList = responses.map(function(r) {
       return (
-        <Response response={r}/>
+        <Response response={r} deleteResponse={thisComp.deleteResponse}/>
       )
     })
 
@@ -80,6 +95,7 @@ class Keyword extends Component {
     return(
       <div>
         <h4>{"\"" + keyword.keyword + "\"" }</h4>
+        <button onClick={this.deleteKeyword}><img src="./img/trash.png" alt="trash icon"></img></button>
         {responsesList}
 
         {addResponseElement}

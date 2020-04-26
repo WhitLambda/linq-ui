@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import $ from "jquery";
+import Switch from "react-switch";
 
 import Response from "./Response";
 
@@ -13,13 +14,23 @@ class Keyword extends Component {
 
     this.state = {
       responses: responses,
+      autoreply: this.props.keyword.autoreply,
       showAddResponse: false
     }
 
+    this.toggleAutoreply = this.toggleAutoreply.bind(this);
     this.handleAddResponseOpen = this.handleAddResponseOpen.bind(this);
     this.handleAddResponseClose = this.handleAddResponseClose.bind(this);
     this.addResponse = this.addResponse.bind(this);
     this.deleteResponse = this.deleteResponse.bind(this);
+  }
+
+  toggleAutoreply() {
+    let newAutoreply = !this.state.autoreply;
+
+    this.setState({autoreply: newAutoreply });
+    this.props.handleAutoreplyToggle(this.props.keyword, newAutoreply);
+    this.props.setUnsavedChanges();
   }
 
   addResponse() {
@@ -76,7 +87,7 @@ class Keyword extends Component {
     const thisComp = this;
     const responsesList = responses.map(function(r) {
       return (
-        <Response response={r} deleteResponse={thisComp.deleteResponse}/>
+        <Response response={r} key={r} deleteResponse={thisComp.deleteResponse}/>
       )
     })
 
@@ -95,6 +106,10 @@ class Keyword extends Component {
     return(
       <div>
         <h4>{"\"" + keyword.keyword + "\"" }</h4>
+        <div>
+          <p>Auto-Reply?</p>
+          <Switch onChange={this.toggleAutoreply} checked={this.state.autoreply} />
+        </div>
         <button onClick={this.deleteKeyword}><img src="./img/trash.png" alt="trash icon"></img></button>
         {responsesList}
 

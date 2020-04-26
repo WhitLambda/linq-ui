@@ -19,11 +19,22 @@ class KeywordsConfigList extends Component {
 
     this.handleAddKeywordOpen = this.handleAddKeywordOpen.bind(this);
     this.handleAddKeywordClose = this.handleAddKeywordClose.bind(this);
+    this.handleAutoreplyToggle = this.handleAutoreplyToggle.bind(this);
     this.addKeyword = this.addKeyword.bind(this);
     this.setUnsavedChanges = this.setUnsavedChanges.bind(this);
     this.unsetUnsavedChanges = this.unsetUnsavedChanges.bind(this);
     this.handleSaveConfig = this.handleSaveConfig.bind(this);
     this.handleDeleteKeyword = this.handleDeleteKeyword.bind(this);
+  }
+
+  handleAutoreplyToggle(keyword, newAutoreply) {
+    let keywordsData = this.state.keywordsData;
+    let index = _.indexOf(keywordsData, keyword);
+
+    keyword.autoreply = newAutoreply;
+    keywordsData[index] = keyword;
+
+    this.setState({ keywordsData: keywordsData });
   }
 
   addKeyword() {
@@ -116,6 +127,7 @@ class KeywordsConfigList extends Component {
     const keywordsList = keywords.map(function(k) {
       return(
         <Keyword keyword={k}
+          handleAutoreplyToggle={thisComp.handleAutoreplyToggle}
           setUnsavedChanges={thisComp.setUnsavedChanges}
           unsetUnsavedChanges={thisComp.unsetUnsavedChanges}
           handleDeleteKeyword={thisComp.handleDeleteKeyword}

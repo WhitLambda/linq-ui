@@ -10,9 +10,6 @@ class Settings extends Component {
     return(
       <div>
         <p>{payload.config.username}</p>
-        <button>Save Config</button>
-        <button>Import</button>
-        <button>Export</button>
         <KeywordsConfigList />
       </div>
     )

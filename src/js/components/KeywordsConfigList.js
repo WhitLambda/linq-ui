@@ -22,6 +22,7 @@ class KeywordsConfigList extends Component {
     this.addKeyword = this.addKeyword.bind(this);
     this.setUnsavedChanges = this.setUnsavedChanges.bind(this);
     this.unsetUnsavedChanges = this.unsetUnsavedChanges.bind(this);
+    this.handleSaveConfig = this.handleSaveConfig.bind(this);
   }
 
   addKeyword() {
@@ -53,6 +54,18 @@ class KeywordsConfigList extends Component {
     this.setState({ keywordsData: keywordsList, showUnsavedChanges: true });
 
     this.handleAddKeywordClose();
+  }
+
+  handleSaveConfig() {
+    const keywordsData = this.state.keywordsData;
+    const {payload} = Session.get();
+    Session.setPayload({
+      config: {
+        username:  payload.username,
+        keywords: keywordsData
+      }
+    });
+    this.setState({ showUnsavedChanges: false });
   }
 
   handleAddKeywordOpen() {

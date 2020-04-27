@@ -14,7 +14,9 @@ class KeywordsConfigList extends Component {
     this.state = {
       keywordsData: payload.config.keywords,
       showAddKeyword: false,
-      showUnsavedChanges: false
+      showUnsavedChanges: false,
+      showImport: false,
+      showExport: false
     }
 
     this.handleAddKeywordOpen = this.handleAddKeywordOpen.bind(this);
@@ -24,7 +26,12 @@ class KeywordsConfigList extends Component {
     this.setUnsavedChanges = this.setUnsavedChanges.bind(this);
     this.unsetUnsavedChanges = this.unsetUnsavedChanges.bind(this);
     this.handleSaveConfig = this.handleSaveConfig.bind(this);
+    this.handleConfigImport = this.handleConfigImport.bind(this);
     this.handleDeleteKeyword = this.handleDeleteKeyword.bind(this);
+    this.handleImportOpen = this.handleImportOpen.bind(this);
+    this.handleImportClose = this.handleImportClose.bind(this);
+    this.handleExportOpen = this.handleExportOpen.bind(this);
+    this.handleExportClose = this.handleExportClose.bind(this);
   }
 
   handleAutoreplyToggle(keyword, newAutoreply) {
@@ -80,6 +87,36 @@ class KeywordsConfigList extends Component {
     this.setState({ showUnsavedChanges: false });
   }
 
+  handleConfigImport() {
+    const thisComp = this;
+    let filename = $("#import-config").prop("files")[0].name;
+
+    if (!/([.]xml)$/.test(filename) && !/([.]json)$/.test(filename)) {
+      alert("Unsupported filetype. Please upload a JSON or XML file.");
+      document.getElementById("import-config").value = "";
+      return;
+    }
+
+    let fileReader = new FileReader();
+    fileReader.onload = function () {
+      let rawData = fileReader.result;
+      let configObj;
+
+      if (/([.]xml)$/.test(filename)) {
+        console.log("Handle XML");
+        document.getElementById("import-config").value = "";
+        thisComp.setState({ showImport: false });
+        return;
+      } else if (/([.]json)$/.test(filename)) {
+        configObj = JSON.parse(rawData);
+      }
+      document.getElementById("import-config").value = "";
+      thisComp.setState({ keywordsData: configObj.keywords, showImport: false, showUnsavedChanges: true });
+    };
+
+    fileReader.readAsText($("#import-config").prop("files")[0]);
+  }
+
   handleDeleteKeyword(keyword) {
     let keywordsData = this.state.keywordsData;
     _.remove(keywordsData, keyword);
@@ -102,11 +139,29 @@ class KeywordsConfigList extends Component {
     this.setState({ showUnsavedChanges: false });
   }
 
+  handleImportOpen() {
+    this.setState({ showImport: true });
+  }
+
+  handleImportClose() {
+    this.setState({ showImport: false });
+  }
+
+  handleExportOpen() {
+    this.setState({ showExport: true });
+  }
+
+  handleExportClose() {
+    this.setState({ showExport: false });
+  }
+
   render() {
     const thisComp = this;
 
     let addKeywordElement;
     let unsavedChanges;
+    let importConfig;
+    let exportConfig;
 
     if (this.state.showAddKeyword) {
       addKeywordElement =
@@ -135,12 +190,35 @@ class KeywordsConfigList extends Component {
       )
     });
 
+    if (this.state.showImport) {
+      importConfig =
+      <div>
+        <input type="file" id="import-config" onChange={this.handleConfigImport}></input>
+        <button onClick={this.handleImportClose}>Cancel</button>
+      </div>
+    } else {
+      importConfig = <button onClick={this.handleImportOpen}>Import</button>
+    }
+
+    if (this.state.showExport) {
+      exportConfig =
+        <div>
+          <button>JSON</button>
+          <button>XML</button>
+          <button onClick={this.handleExportClose}>Cancel</button>
+        </div>
+    } else {
+      exportConfig = <button onClick={this.handleExportOpen}>Export</button>
+    }
+
     return (
       <div>
         <h2>Configure Keywords</h2>
         <button onClick={this.handleSaveConfig}>Save Config</button>
-        <button>Import</button>
-        <button>Export</button>
+        <br />
+        {importConfig}
+        <br />
+        {exportConfig}
         <br />
         {unsavedChanges}
         {addKeywordElement}

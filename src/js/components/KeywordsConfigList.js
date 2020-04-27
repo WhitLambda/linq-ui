@@ -16,22 +16,30 @@ class KeywordsConfigList extends Component {
       showAddKeyword: false,
       showUnsavedChanges: false,
       showImport: false,
-      showExport: false
+      showExport: "export",
+      exportText: ""
     }
+
+    this.addKeyword = this.addKeyword.bind(this);
+    this.handleSaveConfig = this.handleSaveConfig.bind(this);
+    this.handleConfigImport = this.handleConfigImport.bind(this);
+    this.handleConfigExportJson = this.handleConfigExportJson.bind(this);
+    this.handleDeleteKeyword = this.handleDeleteKeyword.bind(this);
+
+    this.handleAutoreplyToggle = this.handleAutoreplyToggle.bind(this);
 
     this.handleAddKeywordOpen = this.handleAddKeywordOpen.bind(this);
     this.handleAddKeywordClose = this.handleAddKeywordClose.bind(this);
-    this.handleAutoreplyToggle = this.handleAutoreplyToggle.bind(this);
-    this.addKeyword = this.addKeyword.bind(this);
+
     this.setUnsavedChanges = this.setUnsavedChanges.bind(this);
     this.unsetUnsavedChanges = this.unsetUnsavedChanges.bind(this);
-    this.handleSaveConfig = this.handleSaveConfig.bind(this);
-    this.handleConfigImport = this.handleConfigImport.bind(this);
-    this.handleDeleteKeyword = this.handleDeleteKeyword.bind(this);
+
     this.handleImportOpen = this.handleImportOpen.bind(this);
     this.handleImportClose = this.handleImportClose.bind(this);
-    this.handleExportOpen = this.handleExportOpen.bind(this);
-    this.handleExportClose = this.handleExportClose.bind(this);
+
+    this.setExportToButton = this.setExportToButton.bind(this);
+    this.setExportToType = this.setExportToType.bind(this);
+    this.setExportToText = this.setExportToText.bind(this);
   }
 
   handleAutoreplyToggle(keyword, newAutoreply) {
@@ -117,6 +125,13 @@ class KeywordsConfigList extends Component {
     fileReader.readAsText($("#import-config").prop("files")[0]);
   }
 
+  handleConfigExportJson() {
+    const {payload} = Session.get();
+    const configObj = payload.config;
+    const config = JSON.stringify(configObj, null, 2);
+    this.setState({ showExport: "text", exportText: config });
+  }
+
   handleDeleteKeyword(keyword) {
     let keywordsData = this.state.keywordsData;
     _.remove(keywordsData, keyword);
@@ -147,12 +162,16 @@ class KeywordsConfigList extends Component {
     this.setState({ showImport: false });
   }
 
-  handleExportOpen() {
-    this.setState({ showExport: true });
+  setExportToButton() {
+    this.setState({ showExport: "export" });
   }
 
-  handleExportClose() {
-    this.setState({ showExport: false });
+  setExportToType() {
+    this.setState({ showExport: "type" });
+  }
+
+  setExportToText() {
+    this.setState({ showExport: "text" });
   }
 
   render() {
@@ -200,15 +219,21 @@ class KeywordsConfigList extends Component {
       importConfig = <button onClick={this.handleImportOpen}>Import</button>
     }
 
-    if (this.state.showExport) {
+    if (this.state.showExport === "type") {
       exportConfig =
         <div>
-          <button>JSON</button>
+          <button onClick={this.handleConfigExportJson}>JSON</button>
           <button>XML</button>
-          <button onClick={this.handleExportClose}>Cancel</button>
+          <button onClick={this.setExportToButton}>Cancel</button>
         </div>
-    } else {
-      exportConfig = <button onClick={this.handleExportOpen}>Export</button>
+    } else if (this.state.showExport === "export") {
+      exportConfig = <button onClick={this.setExportToType}>Export</button>
+    } else if (this.state.showExport === "text") {
+      exportConfig =
+      <div>
+        <button onClick={this.setExportToButton}>X</button>
+        <textarea id="export-text" value={this.state.exportText} readOnly></textarea>
+      </div>
     }
 
     return (

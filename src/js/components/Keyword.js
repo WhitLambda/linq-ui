@@ -94,23 +94,27 @@ class Keyword extends Component {
     let addResponseElement;
     if (this.state.showAddResponse) {
       addResponseElement =
-        <div>
+        <div className="add-response">
           <input type="text" id="new-response" placeholder="Add Response"></input>
             <button onClick={this.addResponse}>Create</button>
             <button onClick={this.handleAddResponseClose}>Cancel</button>
         </div>
     } else {
-      addResponseElement = <button onClick={this.handleAddResponseOpen}><small>Add Response</small></button>
+      addResponseElement = <button className="add-response-button" onClick={this.handleAddResponseOpen}><small>Add Response</small></button>
     }
 
     return(
-      <div>
-        <h4>{"\"" + keyword.keyword + "\"" }</h4>
-        <div>
-          <p>Auto-Reply?</p>
-          <Switch onChange={this.toggleAutoreply} checked={this.state.autoreply} />
+      <div className="keyword">
+        <div className="keyword-top">
+          <h4>{"\"" + keyword.keyword + "\"" }</h4>
+          <div className="keyword-top-right">
+            <div className="autoreply">
+              <p>Auto-Reply?</p>
+              <Switch onChange={this.toggleAutoreply} checked={this.state.autoreply} />
+            </div>
+            <button className="delete-keyword" onClick={this.deleteKeyword}><img src="./img/trash.png" alt="trash icon"></img></button>
+          </div>
         </div>
-        <button onClick={this.deleteKeyword}><img src="./img/trash.png" alt="trash icon"></img></button>
         {responsesList}
 
         {addResponseElement}

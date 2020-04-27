@@ -184,7 +184,7 @@ class KeywordsConfigList extends Component {
 
     if (this.state.showAddKeyword) {
       addKeywordElement =
-        <div>
+        <div className="add-keyword">
           <input type="text" id="new-keyword" placeholder="Add Keyword"></input>
           <button onClick={this.addKeyword}>Create</button>
           <button onClick={this.handleAddKeywordClose}>Cancel</button>
@@ -194,7 +194,7 @@ class KeywordsConfigList extends Component {
     }
 
     if (this.state.showUnsavedChanges) {
-      unsavedChanges = <p className="warning">Warning: you have unsaved changes to your config. Click 'Save Config' to save.</p>
+      unsavedChanges = <p className="unsaved-warning">Warning: you have unsaved changes to your config. Click 'Save Config' to save.</p>
     }
 
     const keywords = this.state.keywordsData;
@@ -211,9 +211,9 @@ class KeywordsConfigList extends Component {
 
     if (this.state.showImport) {
       importConfig =
-      <div>
+      <div className="import">
         <input type="file" id="import-config" onChange={this.handleConfigImport}></input>
-        <button onClick={this.handleImportClose}>Cancel</button>
+        <button onClick={this.handleImportClose}>Cancel Import</button>
       </div>
     } else {
       importConfig = <button onClick={this.handleImportOpen}>Import</button>
@@ -221,33 +221,38 @@ class KeywordsConfigList extends Component {
 
     if (this.state.showExport === "type") {
       exportConfig =
-        <div>
-          <button onClick={this.handleConfigExportJson}>JSON</button>
-          <button>XML</button>
-          <button onClick={this.setExportToButton}>Cancel</button>
+        <div className="export-types">
+          <button onClick={this.handleConfigExportJson}>Export as JSON</button>
+          <button>Export as XML</button>
+          <button onClick={this.setExportToButton}>Cancel Export</button>
         </div>
     } else if (this.state.showExport === "export") {
       exportConfig = <button onClick={this.setExportToType}>Export</button>
     } else if (this.state.showExport === "text") {
       exportConfig =
-      <div>
+      <div className="export-text">
         <button onClick={this.setExportToButton}>X</button>
         <textarea id="export-text" value={this.state.exportText} readOnly></textarea>
       </div>
     }
 
     return (
-      <div>
-        <h2>Configure Keywords</h2>
-        <button onClick={this.handleSaveConfig}>Save Config</button>
-        <br />
-        {importConfig}
-        <br />
-        {exportConfig}
-        <br />
+      <div className="keyword-config-list">
+        <h2>Configure Keywords & Responses</h2>
+        <div className="settings-top">
+          <div className="save-add-buttons">
+            <button onClick={this.handleSaveConfig}>Save Changes</button>
+            {addKeywordElement}
+          </div>
+          <div className="import-export-buttons">
+            {importConfig}
+            {exportConfig}
+          </div>
+        </div>
         {unsavedChanges}
-        {addKeywordElement}
-        {keywordsList}
+        <div className="keywords-list">
+          {keywordsList}
+        </div>
       </div>
     )
   }

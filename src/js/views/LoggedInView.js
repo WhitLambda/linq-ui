@@ -52,9 +52,9 @@ class LoggedInView extends Component {
               shouldCloseOnOverlayClick={false}
               shouldCloseOnEsc={true}
               contentLabel="User Settings"
+              className="settings-modal"
             >
-              <button onClick={this.handleSettingsClose}>x</button>
-              <Settings />
+              <Settings closeSettings={this.handleSettingsClose} />
             </ReactModal>
           </div>
           <div className="user-loggedin">

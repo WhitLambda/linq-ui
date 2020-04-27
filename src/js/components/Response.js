@@ -16,9 +16,9 @@ class Response extends Component {
     const response = this.props.response;
 
     return(
-      <div>
-        <p>{response}</p>
+      <div className="response">
         <button onClick={this.deleteResponse}><img src="./img/trash.png" alt="trash icon"></img></button>
+        <p>{response}</p>
       </div>
     )
   }

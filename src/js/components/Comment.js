@@ -32,18 +32,20 @@ class Comment extends Component {
     let platformIcon = "./img/" + comment.platform + ".png";
 
     return(
-      <div>
+      <div className="comment-container">
         <div onClick={this.handleDialogOpen}>
-          <img src={platformIcon} alt={comment.platform + " icon"}></img>
-          <h4>{comment.username}</h4>
-            <Highlighter
-              className="comment"
-              highlightTag={SubtleHighlight}
-              searchWords={comment.keywords}
-              autoEscape={true}
-              textToHighlight={comment.commentText}
-              />
-          <p>{comment.timestamp}</p>
+          <div className="comment-top">
+            <img src={platformIcon} className="comment-platform-img" alt={comment.platform + " icon"}></img>
+            <h4 className="comment-username">{comment.username}</h4>
+          </div>
+          <Highlighter
+            className="comment-text"
+            highlightTag={SubtleHighlight}
+            searchWords={comment.keywords}
+            autoEscape={true}
+            textToHighlight={comment.commentText}
+          />
+          <p className="comment-timestamp">{comment.timestamp}</p>
         </div>
         <div>
           <ReactModal
@@ -51,9 +53,9 @@ class Comment extends Component {
             shouldCloseOnOverlayClick={false}
             shouldCloseOnEsc={true}
             contentLabel="Comment Response Dialog"
+            className="comment-response-modal"
           >
-            <button onClick={this.handleDialogClose}>x</button>
-            <CommentResponseDialog comment={comment}/>
+            <CommentResponseDialog comment={comment} closeDialog={this.handleDialogClose}/>
           </ReactModal>
         </div>
       </div>

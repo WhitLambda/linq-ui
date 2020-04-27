@@ -14,13 +14,15 @@ class AllCommentsView extends Component {
   componentDidMount() {
     // TODO: remove dummy data json
     let dummyData = require("../../dummy_comments.json").comments;
-    this.setState({comments: dummyData})
+
 
     /* TODO: setup comments fetching from API
     fetch()
       .then(response => this.setState({ comments: response.comments }));
 
     */
+
+    this.setState({ comments: dummyData });
   }
 
   render() {
@@ -28,7 +30,7 @@ class AllCommentsView extends Component {
     const commentsList = <CommentsList comments={comments} />
 
     return(
-      <div>
+      <div className="all-view">
       {comments ? commentsList: <p>No comments found.</p>}
       </div>
     )

@@ -43,7 +43,7 @@ class SortedCommentsView extends Component {
     });
 
     return (
-      <div>
+      <div className="sorted-view">
         {this.state.comments ? sortedByPlatformElements : <p>No comments found.</p>}
       </div>
     )

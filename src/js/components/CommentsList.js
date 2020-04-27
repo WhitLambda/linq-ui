@@ -16,8 +16,8 @@ class CommentsList extends Component {
     });
 
     return (
-      <div>
-        <h3>{categoryName ? categoryName : ""}</h3>
+      <div className="comments-list">
+        <h3 className="comments-list-title">{categoryName ? categoryName : ""}</h3>
         {commentsElements}
       </div>
     )

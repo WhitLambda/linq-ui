@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {
   Route,
   Switch,
-  Link
+  NavLink
 } from "react-router-dom";
 import {Session} from "bc-react-session";
 import ReactModal from "react-modal";
@@ -40,8 +40,8 @@ class LoggedInView extends Component {
       <div>
         <div className="top-bar-nav">
           <ul className="comments-views">
-            <li className="view-choices"><Link to="/all">All</Link></li>
-            <li className="view-choices"><Link to="/sorted">Sorted</Link></li>
+            <NavLink to="/all" activeClassName="nav-active"><li className="view-choices">All</li></NavLink>
+            <NavLink to="/sorted" activeClassName="nav-active"><li className="view-choices">Sorted</li></NavLink>
           </ul>
 
           <h1>Linq</h1>

@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {
   Route,
   Switch,
-  NavLink
+  NavLink,
+  Redirect
 } from "react-router-dom";
 import {Session} from "bc-react-session";
 import ReactModal from "react-modal";
@@ -64,6 +65,7 @@ class LoggedInView extends Component {
         </div>
 
         <Switch>
+          <PrivateRoute path="/" exact={true}/>
           <Route path="/all" component={AllCommentsView}></Route>
           <Route path="/sorted" component={SortedCommentsView}></Route>
         </Switch>
@@ -71,5 +73,19 @@ class LoggedInView extends Component {
     )
   }
 }
+
+const PrivateRoute = () => {
+  const session = Session.get();
+
+  return (
+    // Show the component only when the user is logged in
+    // Otherwise, redirect the user to /signin page
+    <Route render={props => (
+      session.isValid ?
+        <Redirect to="/all" />
+        : <Redirect to="/login" />
+    )} />
+  );
+};
 
 export default LoggedInView;

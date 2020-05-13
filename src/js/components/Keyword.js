@@ -110,7 +110,12 @@ class Keyword extends Component {
           <div className="keyword-top-right">
             <div className="autoreply">
               <p>Auto-Reply?</p>
-              <Switch onChange={this.toggleAutoreply} checked={this.state.autoreply} />
+              <Switch
+                onChange={this.toggleAutoreply}
+                checked={this.state.autoreply}
+                onColor={"#009cff"}
+                offColor={"#2e353c"}
+              />
             </div>
             <button className="delete-keyword" onClick={this.deleteKeyword}><img src="./img/trash.png" alt="trash icon"></img></button>
           </div>

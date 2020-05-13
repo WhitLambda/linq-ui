@@ -32,8 +32,11 @@ class CommentResponseDialog extends Component {
     const { payload } = Session.get();
     const keywordConfig = payload.config.keywords;
 
+    let responsesFound = false;
+
     const responses = keywordConfig.map(function(k) {
       if (_.includes(commentKeywords, k.keyword)) {
+        responsesFound = true;
         return (
           <div key={k.keyword}>
             <h4>"{k.keyword}" Responses</h4>
@@ -70,7 +73,7 @@ class CommentResponseDialog extends Component {
           <h3>Responses</h3>
           <small className="comment-dialog-timestamp">Click to respond.</small>
           <div className="responses-list">
-          {responses}
+          {responsesFound ? responses : <p>No responses found.</p>}
           </div>
         </div>
       </div>

@@ -40,13 +40,14 @@ class LoggedInView extends Component {
     return(
       <div>
         <div className="top-bar-nav">
+          <h1>Linq</h1>
           <ul className="comments-views">
             <NavLink to="/all" activeClassName="nav-active"><li className="view-choices">All</li></NavLink>
             <NavLink to="/sorted" activeClassName="nav-active"><li className="view-choices">Sorted</li></NavLink>
           </ul>
-
-          <h1>Linq</h1>
+          <h3>{username}</h3>
           <button className="settings-button" onClick={this.handleSettingsOpen}>Settings</button>
+          <button onClick={this.handleLogout} className="logout-button">Logout</button>
           <div>
             <ReactModal
               isOpen={this.state.showSettings}
@@ -57,10 +58,6 @@ class LoggedInView extends Component {
             >
               <Settings closeSettings={this.handleSettingsClose} />
             </ReactModal>
-          </div>
-          <div className="user-loggedin">
-            <h3>{username}</h3>
-            <button onClick={this.handleLogout} className="logout-button">Logout</button>
           </div>
         </div>
 

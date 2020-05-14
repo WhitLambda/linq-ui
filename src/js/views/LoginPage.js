@@ -1,38 +1,62 @@
 import React, {Component} from "react";
 import {Session} from 'bc-react-session';
-import $ from "jquery";
 
 class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.validateForm = this.validateForm.bind(this);
+  }
+
   validateForm(e) {
     e.preventDefault(); // prevent form submitting via action
 
     // make request to backend to validate user
-    let username = $("#username").val();
-    let password = $("#password").val();
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-
-    // need to implement authentication with the backend.
-
-    let dummyConfig = require("../../dummy_config.json");
-
+    // temporarily use dummy data from json file
+    const data = require("../../dummy_config.json");
     Session.start({
       payload: {
         username: username,
-        config: dummyConfig
-      },
-      expiration: 86400000 // in milliseconds, set to 1 day, user can also manually logout
-      });
-      window.location.href= "/all";
+        password: password,
+        config: data
+      }
+    })
+    window.location.href = "/";
+
+    /* authenticate and get data from backend
+    fetch("http://127.0.0.1:8000/users/getcomments/",
+    {
+      method: "POST",
+      body: JSON.stringify({"username": username, "password": password}),
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(
+      (result) => {
+        Session.start({
+          payload: {
+            username: username,
+            password: password,
+            config: result
+          },
+          expiration: 600000 // in milliseconds, set to ten minutes. user can also manually logout
+        });
+        window.location.href= "/";
+    });
+    */
   }
 
   render() {
     return (
       <div className="login">
         <h1>Linq</h1>
-        <form name="login" className="login-form" action="/" onSubmit={this.validateForm}>
+        <form name="login" className="login-form" >
           <input type="text" name="username" id="username" placeholder="Username" required autoFocus />
           <input type="password" name="username" id="password" placeholder="Password" required />
-          <input type="submit" value="Login" className="login-button"/>
+          <input type="submit" value="Login" onClick={this.validateForm} />
         </form>
       </div>
     )

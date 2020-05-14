@@ -13,9 +13,6 @@ class CommentResponseDialog extends Component {
   }
 
   sendResponse(event) {
-    const buttonId = event.target.id;
-    console.log(buttonId);
-
     // handle sending response to comment
   }
 

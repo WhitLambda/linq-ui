@@ -1,0 +1,103 @@
+@mixin comment {
+  display: flex;
+  background-color: white;
+  box-shadow: 30px 30px 0px 0px $dark-grey;
+  border: 5px solid #FFFFFF00;
+  margin: 25px;
+  padding: 25px;
+  max-width: 300px;
+  min-height: 200px;
+
+  &:hover {
+    cursor: pointer;
+    border: 5px solid $blue;
+  }
+
+  .comment-inside {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .comment-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .comment-platform-img {
+      margin: 10px;
+      height: 40px;
+      width: auto;
+    }
+
+    .comment-username {
+        color: black;
+        font-size: 20px;
+    }
+  }
+
+  .comment-text {
+    margin-left: 10px;
+    flex-grow: 2;
+  }
+
+  .comment-timestamp {
+    margin-left: 10px;
+    font-size: 12px;
+  }
+}
+
+@mixin comments-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow-y: auto;
+
+  .comment-container {
+    @include comment;
+  }
+}
+
+@mixin comments-list-container {
+  display: flex;
+  flex-direction: column;
+  h3 {
+    margin-left: 25px;
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+}
+
+.all-view {
+  width: 85%;
+  margin: 2%;
+
+  .comments-list-container {
+    @include comments-list-container;
+  }
+
+  .comments-list {
+    @include comments-list;
+  }
+}
+
+.sorted-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  width: 85%;
+  margin: 2%;
+
+  .comments-list-container {
+    @include comments-list-container;
+  }
+
+  .comments-list {
+    @include comments-list;
+    flex-direction: column;
+  }
+}

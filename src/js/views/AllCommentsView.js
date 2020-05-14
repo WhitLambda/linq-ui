@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Session} from "bc-react-session";
 
 import CommentsList from "../components/CommentsList";
 
@@ -12,22 +13,25 @@ class AllCommentsView extends Component {
   }
 
   componentDidMount() {
-    // TODO: remove dummy data json
-    let dummyData = require("../../dummy_comments.json").comments;
+    const {payload} = Session.get();
 
-
-    /* TODO: setup comments fetching from API
-    fetch()
-      .then(response => this.setState({ comments: response.comments }));
-
-    */
-
-    this.setState({ comments: dummyData });
+    fetch("http://127.0.0.1:8000/users/getcomments/",
+    {
+      method: "POST",
+      body: JSON.stringify({"username": payload.username, "password": payload.password}),
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(
+      (result) => {
+        this.setState({comments: result.comments});
+    });
   }
 
   render() {
     const comments = this.state.comments;
-    const commentsList = <CommentsList comments={comments} />
+    const commentsList = <CommentsList comments={comments} name="All Comments" />
 
     return(
       <div className="all-view">

@@ -32,20 +32,22 @@ class Comment extends Component {
     let platformIcon = "./img/" + comment.platform + ".png";
 
     return(
-      <div className="comment-container">
-        <div onClick={this.handleDialogOpen}>
-          <div className="comment-top">
-            <img src={platformIcon} className="comment-platform-img" alt={comment.platform + " icon"}></img>
-            <h4 className="comment-username">{comment.username}</h4>
+      <div>
+        <div className="comment-container" onClick={this.handleDialogOpen}>
+          <div className="comment-inside" >
+            <div className="comment-top">
+              <img src={platformIcon} className="comment-platform-img" alt={comment.platform + " icon"}></img>
+              <h4 className="comment-username">{comment.username}</h4>
+            </div>
+            <Highlighter
+              className="comment-text"
+              highlightTag={SubtleHighlight}
+              searchWords={comment.keywords}
+              autoEscape={true}
+              textToHighlight={comment.commentText}
+            />
+            <p className="comment-timestamp">{comment.timestamp}</p>
           </div>
-          <Highlighter
-            className="comment-text"
-            highlightTag={SubtleHighlight}
-            searchWords={comment.keywords}
-            autoEscape={true}
-            textToHighlight={comment.commentText}
-          />
-          <p className="comment-timestamp">{comment.timestamp}</p>
         </div>
         <div>
           <ReactModal

@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $light-grey;
+  font-family: sans-serif;
+}
+
+.subtle-highlight {
+    color: $blue;
+}
+
+
+.contrast-highlight {
+    color: $blue;
+    background-color: $light-grey;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+@mixin grey-button {
+  background-color: $light-grey;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($light-grey, 5%);
+  }
+}
+
+@mixin grey-close-button {
+  @include grey-button;
+  padding-left: 10px;
+  padding-right: 10px;
+}

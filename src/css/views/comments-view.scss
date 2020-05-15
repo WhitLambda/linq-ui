@@ -94,10 +94,14 @@
 
   .comments-list-container {
     @include comments-list-container;
+    padding-right: 50px;
   }
 
   .comments-list {
     @include comments-list;
     flex-direction: column;
+    flex-wrap: nowrap;
+    //height: 900px;;
+    //overflow-y: auto;
   }
 }

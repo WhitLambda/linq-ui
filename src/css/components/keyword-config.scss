@@ -71,3 +71,15 @@
   @include grey-button;
   align-self: center;
 }
+
+.add-response {
+  input[type="text"] {
+    padding: 5px;
+    margin: 2px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  button {
+    @include grey-button;
+  }
+}

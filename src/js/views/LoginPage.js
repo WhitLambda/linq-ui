@@ -26,7 +26,7 @@ class LoginPage extends Component {
     window.location.href = "/";
 
     /* authenticate and get data from backend
-    fetch("http://127.0.0.1:8000/users/getcomments/",
+    fetch("http://127.0.0.1:8000/users/getkeywords/",
     {
       method: "POST",
       body: JSON.stringify({"username": username, "password": password}),
@@ -36,15 +36,19 @@ class LoginPage extends Component {
     })
     .then(
       (result) => {
-        Session.start({
-          payload: {
-            username: username,
-            password: password,
-            config: result
-          },
-          expiration: 600000 // in milliseconds, set to ten minutes. user can also manually logout
-        });
-        window.location.href= "/";
+        if (result.success === "false") {
+          alert("Invalid username/password.");
+        } else {
+          Session.start({
+            payload: {
+              username: username,
+              password: password,
+              config: result.keywords
+            }
+          });
+          window.location.href = "/";
+        }
+
     });
     */
   }

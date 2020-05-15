@@ -8,17 +8,15 @@
 			"keywords": [
 				"stream schedule"
 			],
-			"platform": "twitter",
+			"platform": "twitch",
 			"mediaId": "0987654321"
 		},
 		{
 			"username": "fan_of_urs123",
 			"timestamp": "2020-01-11 11:21:45",
 			"commentId": "1234567890",
-			"commentText": "this was a nice video!",
-			"keywords": [
-				"nice video"
-			],
+			"commentText": "lol first",
+			"keywords": [],
 			"platform": "youtube",
 			"mediaId": "0987654321"
 		},
@@ -28,7 +26,7 @@
 			"commentId": "1234567890",
 			"commentText": "Your art is lame >:(",
 			"keywords": [],
-			"platform": "reddit",
+			"platform": "twitch",
 			"mediaId": "0987654321"
 		},
 		{
@@ -37,11 +35,11 @@
 			"commentId": "1234567890",
 			"commentText": "Where did you get that food?",
 			"keywords": [],
-			"platform": "twitch",
+			"platform": "youtube",
 			"mediaId": "0987654321"
 		},
 		{
-			"username": "fan_of_urs123",
+			"username": "platinumninja888",
 			"timestamp": "2020-02-03 21:32:04",
 			"commentId": "1234567890",
 			"commentText": "yo nice video. how are you dude?",
@@ -73,7 +71,7 @@
 			"mediaId": "0987654321"
 		},
 		{
-			"username": "some_kinda_spam_guy",
+			"username": "gamerbro42",
 			"timestamp": "2020-02-22 13:15:52",
 			"commentId": "1234567890",
 			"commentText": "sub for sub?",
@@ -85,9 +83,9 @@
 			"username": "double_triple_quad234",
 			"timestamp": "2020-01-23 17:24:33",
 			"commentId": "1234567890",
-			"commentText": "Love this content! Can't wait for more!",
+			"commentText": "Love this vid! Can't wait for more!",
 			"keywords": [],
-			"platform": "twitter",
+			"platform": "youtube",
 			"mediaId": "0987654321"
 		},
 		{
@@ -98,7 +96,61 @@
 			"keywords": [
 				"how are you"
 			],
-			"platform": "reddit",
+			"platform": "twitch",
+			"mediaId": "0987654321"
+		},
+		{
+			"username": "honeyoats",
+			"timestamp": "2020-04-03 10:23:55",
+			"commentId": "1234567890",
+			"commentText": "What song is this?",
+			"keywords": [],
+			"platform": "twitch",
+			"mediaId": "0987654321"
+		},
+		{
+			"username": "unicorngirl123",
+			"timestamp": "2020-05-16 10:23:55",
+			"commentId": "1234567890",
+			"commentText": "that was a good game!",
+			"keywords": [],
+			"platform": "youtube",
+			"mediaId": "0987654321"
+		},
+		{
+			"username": "dudemanguybro",
+			"timestamp": "2020-04-20 06:09:42",
+			"commentId": "1234567890",
+			"commentText": "can I get a sub back?",
+			"keywords": [],
+			"platform": "youtube",
+			"mediaId": "0987654321"
+		},
+		{
+			"username": "pineapple_pizza",
+			"timestamp": "2019-08-11 12:33:28",
+			"commentId": "1234567890",
+			"commentText": "What are your PC specs?",
+			"keywords": [],
+			"platform": "youtube",
+			"mediaId": "0987654321"
+		},
+		{
+			"username": "charleslikesakitas",
+			"timestamp": "2019-08-11 12:33:28",
+			"commentId": "1234567890",
+			"commentText": "i subbed :D",
+			"keywords": [],
+			"platform": "twitch",
+			"mediaId": "0987654321"
+		},
+		{
+			"username": "currymurray",
+			"timestamp": "2020-01-12 03:44:31",
+			"commentId": "1234567890",
+			"commentText": "hello! nice stream btw",
+			"keywords": [],
+			"platform": "twitch",
 			"mediaId": "0987654321"
 		}
 	]

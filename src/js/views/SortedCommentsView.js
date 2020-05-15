@@ -14,12 +14,12 @@ class SortedCommentsView extends Component {
   }
 
   componentDidMount() {
-    /* TODO: remove dummy data json
-    let dummyData = require("../../dummy_comments.json").comments;
+    // TODO: remove dummy data json
+    let data = require("../../dummy_comments.json").comments;
 
     let sortedByPlatform = {};
     // generate a list of the available platforms with the comments for each platform
-    _.forEach(dummyData, function(comment) {
+    _.forEach(data, function(comment) {
       if (sortedByPlatform.hasOwnProperty(comment.platform)) {
         sortedByPlatform[comment.platform].push(comment);
       } else {
@@ -28,8 +28,8 @@ class SortedCommentsView extends Component {
     });
 
     this.setState({comments: sortedByPlatform})
-    */
 
+    /*
     const {payload} = Session.get();
 
     fetch("http://127.0.0.1:8000/users/getcomments/",
@@ -53,6 +53,7 @@ class SortedCommentsView extends Component {
         });
         this.setState({comments: sortedByPlatform})
     });
+    */
   }
 
   render() {

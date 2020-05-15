@@ -13,6 +13,10 @@ class AllCommentsView extends Component {
   }
 
   componentDidMount() {
+    const data = require("../../dummy_comments.json").comments;
+    this.setState({ comments: data });
+
+    /*
     const {payload} = Session.get();
 
     fetch("http://127.0.0.1:8000/users/getcomments/",
@@ -27,6 +31,7 @@ class AllCommentsView extends Component {
       (result) => {
         this.setState({comments: result.comments});
     });
+    */
   }
 
   render() {
